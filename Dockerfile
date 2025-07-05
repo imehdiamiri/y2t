@@ -1,14 +1,21 @@
 
 # Base image
-FROM n8nio/n8n
+FROM node:18-bullseye
 
-# Install yt-dlp
+# نصب ابزارهای موردنیاز
 USER root
-RUN apt-get update && apt-get install -y python3-pip ffmpeg && pip install yt-dlp
+RUN apt-get update && \
+    apt-get install -y python3-pip ffmpeg && \
+    pip install yt-dlp
 
-# Switch back to n8n user
-USER node
+# نصب n8n
+RUN npm install -g n8n
 
+# Volume برای دیتا
+VOLUME /home/node/.n8n
+
+# پورت
 EXPOSE 5678
 
+# اجرای n8n
 CMD ["n8n"]
