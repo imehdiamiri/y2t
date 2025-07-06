@@ -2,7 +2,9 @@ FROM n8nio/n8n
 
 USER root
 
-RUN apt-get update &&     apt-get install -y ffmpeg python3-pip &&     pip install -U yt-dlp
+RUN apk update && \
+    apk add --no-cache ffmpeg py3-pip && \
+    pip install -U yt-dlp
 
 USER node
 
